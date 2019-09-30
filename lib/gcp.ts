@@ -18,10 +18,27 @@ import {
     ExtensionPack,
     metadata,
 } from "@atomist/sdm";
+import { CompressingGoalCache } from "@atomist/sdm-core";
+import * as _ from "lodash";
+import { GoogleCloudStorageGoalCacheArchiveStore } from "./cache";
 
-export const SeedSupport: ExtensionPack = {
+/**
+ * Default the goal cache store to a CompressingGoalCache using
+ * [[GoogleCloudStorageGoalCacheArchiveStore]] as its storage back
+ * end.
+ */
+export const GcpSupport: ExtensionPack = {
     ...metadata(),
     configure: sdm => {
+        _.defaults(sdm, {
+            configuration: {
+                sdm: {
+                    cache: {
+                        store: new CompressingGoalCache(new GoogleCloudStorageGoalCacheArchiveStore()),
+                    },
+                },
+            },
+        });
         return sdm;
     },
 };

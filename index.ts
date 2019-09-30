@@ -14,4 +14,8 @@
  * limitations under the License.
  */
 
-export { SeedSupport } from "./lib/seed";
+export {
+    GoogleCloudStorageCacheConfiguration,
+    GoogleCloudStorageGoalCacheArchiveStore,
+} from "./lib/cache";
+export { GcpSupport } from "./lib/gcp";

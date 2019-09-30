@@ -26,12 +26,14 @@
   "main": "./index.js",
   "types": "./index.d.ts",
   "dependencies": {
-    "@google-cloud/storage": "^3.3.0"
+    "@google-cloud/storage": "^3.3.0",
+    "@types/lodash": "^4.14.141",
+    "lodash": "^4.17.15"
   },
   "peerDependencies": {
-    "@atomist/automation-client": ">=1.7.0",
-    "@atomist/sdm": ">=1.7.0",
-    "@atomist/sdm-core": ">=1.7.0"
+    "@atomist/automation-client": "^1.7.0",
+    "@atomist/sdm": "^1.7.0",
+    "@atomist/sdm-core": "^1.7.0"
   },
   "devDependencies": {
     "@atomist/automation-client": "^1.7.0",
