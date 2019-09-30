@@ -138,7 +138,7 @@ describe("support/cache", () => {
     describe("GoogleCloudStorageGoalCacheArchiveStore", () => {
 
         before(function(): void {
-            if (!process.env.GOOGLE_APPLICATION_CREDENTIALS) {
+            if (!process.env.GOOGLE_APPLICATION_CREDENTIALS || !process.env.GCS_TEST_BUCKET) {
                 // tslint:disable-next-line:no-invalid-this
                 this.skip();
             }
@@ -153,7 +153,7 @@ describe("support/cache", () => {
 
         it("should store, retrive, and delete a cache item", async () => {
             const a = new GoogleCloudStorageGoalCacheArchiveStore();
-            const b = "atm-atomist-sdm-goal-cache-production";
+            const b = process.env.GCS_TEST_BUCKET as string; // tested in before()
             const p = `test-path-${guid()}`;
             const gi: GoalInvocation = {
                 configuration: {
