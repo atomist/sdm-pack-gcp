@@ -2,13 +2,17 @@
   <img src="https://images.atomist.com/sdm/SDM-Logo-Dark.png">
 </p>
 
-# @atomist-seeds/sdm-pack
+# @atomist/sdm-pack-gcp
 
-[![atomist sdm goals](http://badge.atomist.com/T29E48P34/atomist-seeds/sdm-pack/24939d09-fe00-4a7a-8d52-0fc4c9672100)](https://app.atomist.com/workspace/T29E48P34)
-[![npm version](https://img.shields.io/npm/v/@atomist-seeds/sdm-pack.svg)](https://www.npmjs.com/package/@atomist-seeds/sdm-pack)
+[![atomist sdm goals](https://badge.atomist.com/T29E48P34/atomist/sdm-pack-gcp/b1d61e5a-3138-44a9-acc3-31d9ccf01e05)](https://app.atomist.com/workspace/T29E48P34)
+[![npm version](https://img.shields.io/npm/v/@atomist/sdm-pack-gcp.svg)](https://www.npmjs.com/package/@atomist/sdm-pack-gcp)
 
-A starting point for an extension pack for an [Atomist][atomist]
-software delivery machine (SDM).
+[Atomist][atomist] software delivery machine (SDM) extension Pack
+enabling integration with [Google Cloud Platform (GCP)][gcp].  It
+currently provides a back-end storage implementation for SDM goal
+caching.
+
+[gcp]: https://cloud.google.com/ (Google Cloud Platform)
 
 Software delivery machines enable you to control your delivery process
 in code.  Think of it as an API for your software delivery.  See the
@@ -61,7 +65,7 @@ channel in the [Atomist community Slack workspace][slack].
 
 If you find a problem, please create an [issue][].
 
-[issue]: https://github.com/atomist-seeds/sdm-pack/issues
+[issue]: https://github.com/atomist/sdm-pack-gcp/issues
 
 ## Development
 
