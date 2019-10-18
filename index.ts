@@ -18,4 +18,4 @@ export {
     GoogleCloudStorageCacheConfiguration,
     GoogleCloudStorageGoalCacheArchiveStore,
 } from "./lib/cache";
-export { GcpSupport } from "./lib/gcp";
+export { gcpSupport } from "./lib/gcp";

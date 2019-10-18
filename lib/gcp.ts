@@ -27,18 +27,18 @@ import { GoogleCloudStorageGoalCacheArchiveStore } from "./cache";
  * [[GoogleCloudStorageGoalCacheArchiveStore]] as its storage back
  * end.
  */
-export const GcpSupport: ExtensionPack = {
-    ...metadata(),
-    configure: sdm => {
-        _.defaults(sdm, {
-            configuration: {
+export function gcpSupport(): ExtensionPack {
+    return {
+        ...metadata(),
+        configure: sdm => {
+            _.defaults(sdm.configuration, {
                 sdm: {
                     cache: {
                         store: new CompressingGoalCache(new GoogleCloudStorageGoalCacheArchiveStore()),
                     },
                 },
-            },
-        });
-        return sdm;
-    },
-};
+            });
+            return sdm;
+        },
+    };
+}
