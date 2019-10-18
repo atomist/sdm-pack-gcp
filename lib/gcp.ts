@@ -31,7 +31,7 @@ export function gcpSupport(): ExtensionPack {
     return {
         ...metadata(),
         configure: sdm => {
-            _.defaults(sdm.configuration, {
+            _.defaultsDeep(sdm.configuration, {
                 sdm: {
                     cache: {
                         store: new CompressingGoalCache(new GoogleCloudStorageGoalCacheArchiveStore()),
