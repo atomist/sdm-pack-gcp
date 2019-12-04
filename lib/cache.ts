@@ -99,15 +99,17 @@ export class GoogleCloudStorageGoalCacheArchiveStore implements GoalCacheArchive
 /** Construct unique object path for goal invocation. */
 export function getCachePath(gi: GoalInvocation, classifier: string = "default"): string {
     const cacheConfig = getCacheConfig(gi);
+    const classifierPath = classifier
+        .replace(/\$\{providerId\}/g, gi.goalEvent.repo.providerId)
+        .replace(/\$\{owner\}/g, gi.goalEvent.repo.owner)
+        .replace(/\$\{repo\}/g, gi.goalEvent.repo.name)
+        .replace(/\$\{branch\}/g, gi.goalEvent.branch)
+        .replace(/\$\{sha\}/g, gi.goalEvent.sha);
     const cachePath = [
         cacheConfig.path,
         gi.context.workspaceId,
-        gi.goalEvent.repo.providerId,
-        gi.goalEvent.repo.owner,
-        gi.goalEvent.repo.name,
-        gi.goalEvent.branch,
-        classifier,
-        `${gi.goalEvent.sha}-cache.tar.gz`,
+        classifierPath,
+        "cache.tar.gz",
     ].join("/");
     return cachePath;
 }

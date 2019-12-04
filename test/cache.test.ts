@@ -101,35 +101,44 @@ describe("support/cache", () => {
 
     describe("getCachePath", () => {
 
-        it("should return a reasonable path", () => {
-            const gi: GoalInvocation = {
-                configuration: {
-                    name: "@byrds/sweetheart-of-the-rodeo",
-                    sdm: {
-                        cache: {
-                            bucket: "hickory-wind",
-                            enabled: true,
-                            path: "lazy/days",
-                        },
+        const gi: GoalInvocation = {
+            configuration: {
+                name: "@byrds/sweetheart-of-the-rodeo",
+                sdm: {
+                    cache: {
+                        bucket: "hickory-wind",
+                        enabled: true,
+                        path: "lazy/days",
                     },
                 },
-                goalEvent: {
-                    branch: "the-christian-life",
-                    repo: {
-                        name: "you-aint-goin-nowhere",
-                        owner: "YoureStillOnMyMind",
-                        providerId: "100yearsfromnow",
-                    },
-                    sha: "808eddb6016a45091e6d53f12ab8ca2d1cd7fb3e",
+            },
+            goalEvent: {
+                branch: "the-christian-life",
+                repo: {
+                    name: "you-aint-goin-nowhere",
+                    owner: "YoureStillOnMyMind",
+                    providerId: "100yearsfromnow",
                 },
-                context: {
-                    workspaceId: "TH3BY4D5",
-                },
-            } as any;
-            const c = "i-am-a-pilgrim";
+                sha: "808eddb6016a45091e6d53f12ab8ca2d1cd7fb3e",
+            },
+            context: {
+                workspaceId: "TH3BY4D5",
+            },
+        } as any;
+
+        it("should return a simple path", () => {
+            const c = "i-am/a-pilgrim";
+            const p = getCachePath(gi, c);
+            const e = "lazy/days/TH3BY4D5/i-am/a-pilgrim/cache.tar.gz";
+            assert(p === e);
+        });
+
+        it("should return a replaced path", () => {
+            // tslint:disable-next-line:no-invalid-template-strings
+            const c = "${providerId}/${owner}/${repo}/i-am/a-pilgrim/${branch}/${sha}/${repo}";
             const p = getCachePath(gi, c);
             // tslint:disable-next-line:max-line-length
-            const e = "lazy/days/TH3BY4D5/100yearsfromnow/YoureStillOnMyMind/you-aint-goin-nowhere/the-christian-life/i-am-a-pilgrim/808eddb6016a45091e6d53f12ab8ca2d1cd7fb3e-cache.tar.gz";
+            const e = "lazy/days/TH3BY4D5/100yearsfromnow/YoureStillOnMyMind/you-aint-goin-nowhere/i-am/a-pilgrim/the-christian-life/808eddb6016a45091e6d53f12ab8ca2d1cd7fb3e/you-aint-goin-nowhere/cache.tar.gz";
             assert(p === e);
         });
 
