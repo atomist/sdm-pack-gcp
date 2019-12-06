@@ -102,34 +102,14 @@ describe("support/cache", () => {
     describe("getCachePath", () => {
 
         it("should return a reasonable path", () => {
-            const gi: GoalInvocation = {
-                configuration: {
-                    name: "@byrds/sweetheart-of-the-rodeo",
-                    sdm: {
-                        cache: {
-                            bucket: "hickory-wind",
-                            enabled: true,
-                            path: "lazy/days",
-                        },
-                    },
-                },
-                goalEvent: {
-                    branch: "the-christian-life",
-                    repo: {
-                        name: "you-aint-goin-nowhere",
-                        owner: "YoureStillOnMyMind",
-                        providerId: "100yearsfromnow",
-                    },
-                    sha: "808eddb6016a45091e6d53f12ab8ca2d1cd7fb3e",
-                },
-                context: {
-                    workspaceId: "TH3BY4D5",
-                },
-            } as any;
+            const cc = {
+                bucket: "you-aint-goin-nowhere",
+                enabled: true,
+                path: "lazy/days",
+            };
             const c = "i-am-a-pilgrim";
-            const p = getCachePath(gi, c);
-            // tslint:disable-next-line:max-line-length
-            const e = "lazy/days/TH3BY4D5/100yearsfromnow/YoureStillOnMyMind/you-aint-goin-nowhere/the-christian-life/i-am-a-pilgrim/808eddb6016a45091e6d53f12ab8ca2d1cd7fb3e-cache.tar.gz";
+            const p = getCachePath(cc, c);
+            const e = "lazy/days/i-am-a-pilgrim/cache.tar.gz";
             assert(p === e);
         });
 

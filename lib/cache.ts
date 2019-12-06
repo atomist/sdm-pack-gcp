@@ -49,6 +49,8 @@ export interface GoogleCloudStorageCacheConfiguration extends CacheConfiguration
 
 type GcsOp = (s: Storage, b: string, p: string) => Promise<any>;
 
+export type CacheConfig = Required<Required<GoogleCloudStorageCacheConfiguration>["cache"]>;
+
 /**
  * Goal archive store that stores the compressed archives in a Google
  * Cloud Storage bucket.  All failures are caught and logged.  If
@@ -77,7 +79,7 @@ export class GoogleCloudStorageGoalCacheArchiveStore implements GoalCacheArchive
 
     private async gcs(gi: GoalInvocation, classifier: string, op: GcsOp, verb: string): Promise<void> {
         const cacheConfig = getCacheConfig(gi);
-        const cachePath = getCachePath(gi, classifier);
+        const cachePath = getCachePath(cacheConfig, classifier);
         const storage = new Storage();
         const objectUri = `gs://${cacheConfig.bucket}/${cachePath}`;
         const gerund = verb.replace(/e$/, "ing");
@@ -96,18 +98,12 @@ export class GoogleCloudStorageGoalCacheArchiveStore implements GoalCacheArchive
 
 }
 
-/** Construct unique object path for goal invocation. */
-export function getCachePath(gi: GoalInvocation, classifier: string = "default"): string {
-    const cacheConfig = getCacheConfig(gi);
+/** Construct object path for cache configuration and classifier. */
+export function getCachePath(cacheConfig: CacheConfig, classifier: string = "default"): string {
     const cachePath = [
         cacheConfig.path,
-        gi.context.workspaceId,
-        gi.goalEvent.repo.providerId,
-        gi.goalEvent.repo.owner,
-        gi.goalEvent.repo.name,
-        gi.goalEvent.branch,
         classifier,
-        `${gi.goalEvent.sha}-cache.tar.gz`,
+        "cache.tar.gz",
     ].join("/");
     return cachePath;
 }
@@ -115,7 +111,7 @@ export function getCachePath(gi: GoalInvocation, classifier: string = "default")
 /**
  * Retrieve cache configuration and populate with default values.
  */
-export function getCacheConfig(gi: GoalInvocation): Required<Required<GoogleCloudStorageCacheConfiguration>["cache"]> {
+export function getCacheConfig(gi: GoalInvocation): CacheConfig {
     const cacheConfig = gi.configuration.sdm.cache || {};
     cacheConfig.enabled = cacheConfig.enabled || false;
     cacheConfig.bucket = cacheConfig.bucket ||
