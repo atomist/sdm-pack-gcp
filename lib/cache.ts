@@ -18,12 +18,10 @@ import {
     LeveledLogMethod,
     logger,
 } from "@atomist/automation-client/lib/util/logger";
-import {
-    CacheConfiguration,
-    GoalInvocation,
-    ProgressLog,
-} from "@atomist/sdm";
 import { GoalCacheArchiveStore } from "@atomist/sdm-core/lib/goal/cache/CompressingGoalCache";
+import { GoalInvocation } from "@atomist/sdm/lib/api/goal/GoalInvocation";
+import { CacheConfiguration } from "@atomist/sdm/lib/api/machine/SoftwareDeliveryMachineOptions";
+import { ProgressLog } from "@atomist/sdm/lib/spi/log/ProgressLog";
 import { Storage } from "@google-cloud/storage";
 
 export interface GoogleCloudStorageCacheConfiguration extends CacheConfiguration {
