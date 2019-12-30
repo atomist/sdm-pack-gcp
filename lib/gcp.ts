@@ -14,11 +14,9 @@
  * limitations under the License.
  */
 
-import {
-    ExtensionPack,
-    metadata,
-} from "@atomist/sdm";
 import { CompressingGoalCache } from "@atomist/sdm-core/lib/goal/cache/CompressingGoalCache";
+import { metadata } from "@atomist/sdm/lib/api-helper/misc/extensionPack";
+import { ExtensionPack } from "@atomist/sdm/lib/api/machine/ExtensionPack";
 import * as _ from "lodash";
 import { GoogleCloudStorageGoalCacheArchiveStore } from "./cache";
 

@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import { guid } from "@atomist/automation-client";
-import { GoalInvocation } from "@atomist/sdm";
+import { guid } from "@atomist/automation-client/lib/internal/util/string";
+import { GoalInvocation } from "@atomist/sdm/lib/api/goal/GoalInvocation";
 import { Storage } from "@google-cloud/storage";
 import * as assert from "assert";
 import * as fs from "fs-extra";
