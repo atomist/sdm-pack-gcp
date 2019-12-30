@@ -18,7 +18,7 @@ import {
     ExtensionPack,
     metadata,
 } from "@atomist/sdm";
-import { CompressingGoalCache } from "@atomist/sdm-core";
+import { CompressingGoalCache } from "@atomist/sdm-core/lib/goal/cache/CompressingGoalCache";
 import * as _ from "lodash";
 import { GoogleCloudStorageGoalCacheArchiveStore } from "./cache";
 
