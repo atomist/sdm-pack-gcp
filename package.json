@@ -34,9 +34,9 @@
     "@atomist/sdm-core": "^1.7.0"
   },
   "devDependencies": {
-    "@atomist/automation-client": "2.0.0-master.20200131202342",
-    "@atomist/sdm": "2.0.0-master.20200204153359",
-    "@atomist/sdm-core": "2.0.0-master.20200131204151",
+    "@atomist/automation-client": "2.0.0-remove-index.20200101150125",
+    "@atomist/sdm": "2.0.0-remove-index.20200105193510",
+    "@atomist/sdm-core": "2.0.0-remove-index.20200105223428",
     "@types/fs-extra": "^8.0.0",
     "@types/json-stringify-safe": "^5.0.0",
     "@types/mocha": "^5.2.7",
@@ -52,8 +52,8 @@
     "supervisor": "^0.12.0",
     "ts-node": "^8.5.4",
     "tslint": "^5.20.1",
-    "typedoc": "^0.15.6",
-    "typescript": "^3.7.4"
+    "typedoc": "^0.15.3",
+    "typescript": "^3.7.3"
   },
   "directories": {
     "test": "test"
