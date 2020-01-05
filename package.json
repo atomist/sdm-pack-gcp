@@ -34,9 +34,9 @@
     "@atomist/sdm-core": "^1.7.0"
   },
   "devDependencies": {
-    "@atomist/automation-client": "2.0.0-remove-index.20191230145915",
-    "@atomist/sdm": "2.0.0-remove-index.20191230181344",
-    "@atomist/sdm-core": "2.0.0-remove-index.20191230191914",
+    "@atomist/automation-client": "2.0.0-remove-index.20200101150125",
+    "@atomist/sdm": "2.0.0-remove-index.20200105193510",
+    "@atomist/sdm-core": "2.0.0-remove-index.20200105223428",
     "@types/fs-extra": "^8.0.0",
     "@types/json-stringify-safe": "^5.0.0",
     "@types/mocha": "^5.2.7",
