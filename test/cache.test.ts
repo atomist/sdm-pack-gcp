@@ -163,7 +163,7 @@ describe("support/cache", () => {
                 },
             } as any;
             const c = "classifierx";
-            const f = `${p}/WORKSPACEx/providerx/ownerx/namex/branchx/classifierx/shax-cache.tar.gz`;
+            const f = `${p}/classifierx/cache.tar.gz`;
             const t = path.join(os.tmpdir(), `atomist-sdm-cache-test-${guid()}`);
             await fs.ensureDir(t);
             tmpDirs.push(t);
@@ -172,7 +172,7 @@ describe("support/cache", () => {
             await a.store(gi, c, i);
             const s = new Storage();
             const ie = await s.bucket(b).file(f).exists();
-            assert(ie[0] === true, `Object does not exist: ${stringify(ie)}`);
+            assert(ie[0] === true, `Object does not exist: gs://${b}/${f}`);
             const o = path.join(t, `output-${guid()}.tar.gz`);
             await a.retrieve(gi, c, o);
             assert(fs.existsSync(o));
