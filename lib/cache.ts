@@ -60,7 +60,7 @@ export class GoogleCloudStorageGoalCacheArchiveStore implements GoalCacheArchive
     public async store(gi: GoalInvocation, classifier: string, archivePath: string): Promise<void> {
         await this.gcs(gi, classifier, async (storage, bucket, cachePath) => storage.bucket(bucket).upload(archivePath, {
             destination: cachePath,
-            predefinedAcl: "projectPrivate",
+            // predefinedAcl: "projectPrivate",
             resumable: false, // avoid https://github.com/googleapis/nodejs-storage/issues/909
         }), "store");
     }
