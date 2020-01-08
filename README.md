@@ -88,6 +88,13 @@ documentation.
 $ npm run build
 ```
 
+To perform the integration tests against the Google Cloud Storage API,
+the tests must be run with the appropriate environment variables set.
+
+```
+$ GOOGLE_APPLICATION_CREDENTIALS=CREDS_FILE.json GCS_TEST_BUCKET=BUCKET_NAME npm test
+```
+
 ### Release
 
 Releases are handled via the [Atomist SDM][atomist-sdm].  Just press
