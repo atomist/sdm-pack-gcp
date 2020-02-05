@@ -18,12 +18,11 @@ import {
     LeveledLogMethod,
     logger,
 } from "@atomist/automation-client/lib/util/logger";
-import {
-    CacheConfiguration,
-    GoalInvocation,
-    ProgressLog,
-} from "@atomist/sdm";
+import { doWithRetry } from "@atomist/automation-client/lib/util/retry";
 import { GoalCacheArchiveStore } from "@atomist/sdm-core/lib/goal/cache/CompressingGoalCache";
+import { GoalInvocation } from "@atomist/sdm/lib/api/goal/GoalInvocation";
+import { CacheConfiguration } from "@atomist/sdm/lib/api/machine/SoftwareDeliveryMachineOptions";
+import { ProgressLog } from "@atomist/sdm/lib/spi/log/ProgressLog";
 import { Storage } from "@google-cloud/storage";
 
 export interface GoogleCloudStorageCacheConfiguration extends CacheConfiguration {
@@ -84,7 +83,7 @@ export class GoogleCloudStorageGoalCacheArchiveStore implements GoalCacheArchive
         const gerund = verb.replace(/e$/, "ing");
         try {
             ll(`${gerund} cache archive ${objectUri}`, gi.progressLog);
-            await op(storage, cacheConfig.bucket, cachePath);
+            await doWithRetry(() => op(storage, cacheConfig.bucket, cachePath), `${verb} cache archive`);
             ll(`${verb}d cache archive ${objectUri}`, gi.progressLog);
         } catch (e) {
             e.message = `Failed to ${verb} cache archive ${objectUri}: ${e.message}`;

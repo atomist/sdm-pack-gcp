@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Atomist, Inc.
+ * Copyright © 2020 Atomist, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,11 @@
  */
 
 import {
-    ExtensionPack,
-    metadata,
-} from "@atomist/sdm";
-import { CompressingGoalCache } from "@atomist/sdm-core/lib/goal/cache/CompressingGoalCache";
+    CompressingGoalCache,
+    CompressionMethod,
+} from "@atomist/sdm-core/lib/goal/cache/CompressingGoalCache";
+import { metadata } from "@atomist/sdm/lib/api-helper/misc/extensionPack";
+import { ExtensionPack } from "@atomist/sdm/lib/api/machine/ExtensionPack";
 import * as _ from "lodash";
 import { GoogleCloudStorageGoalCacheArchiveStore } from "./cache";
 
@@ -27,14 +28,16 @@ import { GoogleCloudStorageGoalCacheArchiveStore } from "./cache";
  * [[GoogleCloudStorageGoalCacheArchiveStore]] as its storage back
  * end.
  */
-export function gcpSupport(): ExtensionPack {
+export function gcpSupport(options: { compression?: CompressionMethod } = {}): ExtensionPack {
     return {
         ...metadata(),
         configure: sdm => {
             _.defaultsDeep(sdm.configuration, {
                 sdm: {
                     cache: {
-                        store: new CompressingGoalCache(new GoogleCloudStorageGoalCacheArchiveStore()),
+                        store: new CompressingGoalCache(
+                            new GoogleCloudStorageGoalCacheArchiveStore(),
+                            options.compression),
                     },
                 },
             });
