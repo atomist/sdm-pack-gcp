@@ -58,8 +58,8 @@ export type CacheConfig = Required<Required<GoogleCloudStorageCacheConfiguration
  */
 export class GoogleCloudStorageGoalCacheArchiveStore implements GoalCacheArchiveStore {
 
-    public async store(gi: GoalInvocation, classifier: string, archivePath: string): Promise<void> {
-        await this.gcs(gi, classifier, async (storage, bucket, cachePath) => storage.bucket(bucket).upload(archivePath, {
+    public async store(gi: GoalInvocation, classifier: string, archivePath: string): Promise<string> {
+        return this.gcs(gi, classifier, async (storage, bucket, cachePath) => storage.bucket(bucket).upload(archivePath, {
             destination: cachePath,
             resumable: false, // avoid https://github.com/googleapis/nodejs-storage/issues/909
         }), "store");
@@ -75,7 +75,7 @@ export class GoogleCloudStorageGoalCacheArchiveStore implements GoalCacheArchive
         }), "retrieve");
     }
 
-    private async gcs(gi: GoalInvocation, classifier: string, op: GcsOp, verb: string): Promise<void> {
+    private async gcs(gi: GoalInvocation, classifier: string, op: GcsOp, verb: string): Promise<string> {
         const cacheConfig = getCacheConfig(gi);
         const cachePath = getCachePath(cacheConfig, classifier);
         const storage = new Storage();
@@ -85,12 +85,14 @@ export class GoogleCloudStorageGoalCacheArchiveStore implements GoalCacheArchive
             ll(`${gerund} cache archive ${objectUri}`, gi.progressLog);
             await doWithRetry(() => op(storage, cacheConfig.bucket, cachePath), `${verb} cache archive`);
             ll(`${verb}d cache archive ${objectUri}`, gi.progressLog);
+            return objectUri;
         } catch (e) {
             e.message = `Failed to ${verb} cache archive ${objectUri}: ${e.message}`;
             ll(e.message, gi.progressLog, logger.error);
             if (verb === "retrieve") {
                 throw e;
             }
+            return objectUri;
         }
     }
 

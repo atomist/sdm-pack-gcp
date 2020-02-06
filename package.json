@@ -35,8 +35,8 @@
   },
   "devDependencies": {
     "@atomist/automation-client": "2.0.0-master.20200131202342",
-    "@atomist/sdm": "2.0.0-master.20200204153359",
-    "@atomist/sdm-core": "2.0.0-master.20200131204151",
+    "@atomist/sdm": "2.0.0-skill-output.20200206145221",
+    "@atomist/sdm-core": "2.0.0-skill-output.20200206145944",
     "@types/fs-extra": "^8.0.0",
     "@types/json-stringify-safe": "^5.0.0",
     "@types/mocha": "^5.2.7",
