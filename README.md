@@ -1,11 +1,16 @@
-<p align="center">
-  <img src="https://images.atomist.com/sdm/SDM-Logo-Dark.png">
-</p>
+# DEPRECATED @atomist/sdm-pack-gcp
 
-# @atomist/sdm-pack-gcp
+The functionality in the SDM pack has been migrated to
+[`@atomist/sdm-core`][sdm-core].  Your import statements should be changed to
+something like
 
-[![atomist sdm goals](https://badge.atomist.com/T29E48P34/atomist/sdm-pack-gcp/b1d61e5a-3138-44a9-acc3-31d9ccf01e05)](https://app.atomist.com/workspace/T29E48P34)
-[![npm version](https://img.shields.io/npm/v/@atomist/sdm-pack-gcp.svg)](https://www.npmjs.com/package/@atomist/sdm-pack-gcp)
+```typescript
+import { gcpSupport } from "@atomst/sdm-core/lib/pack/gcp";
+```
+
+[sdm-core]: https://github.com/atomist/sdm-core
+
+---
 
 [Atomist][atomist] software delivery machine (SDM) extension Pack
 enabling integration with [Google Cloud Platform (GCP)][gcp].  It
